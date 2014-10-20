@@ -34,14 +34,13 @@ $(document).ready(function () {
       $.each(data, function(value) {
         var answerId = data[value].id;
         var $el = $('<li id="' + answerId + '" class="possible-answer">' + data[value].description + '</li>');
-        $('button#' + answerId).append($el);
+        $('button.answer' + value).empty().append($el);
       });
     });
   };
 
   $('button.answer').on('click', function() {
     var val = $(this).children('li').text();
-    console.log(val)
 
     showCorrectAnswer();
 
@@ -62,6 +61,7 @@ $(document).ready(function () {
   $('button#next').on('click', function() {
     counter += 1;
     $('h1.question').remove();
+    $('button.answer').remove('li.possible-answer');
     footer.children('li').remove();
     getQuestion();
   });
@@ -84,10 +84,6 @@ $(document).ready(function () {
     var $el = $('<li>' + counter + '/4' + '</li>');
     footer.append($el);
   }
-
-
-
-
 
 });
 
