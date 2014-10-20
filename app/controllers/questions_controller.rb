@@ -7,7 +7,11 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    render json: @question.to_json(include: :possible_answers)
+    @possible_answers = @question.possible_answers
+    respond_to do |format|
+      format.html
+      format.json { render :json => @possible_answers }
+    end
   end
 
 end
